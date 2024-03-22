@@ -7,8 +7,8 @@ import QuinnOverlayContextProvider from './src/Context/QuinnOverlayContext';
 function App(): React.JSX.Element {
   //DO this in the highest order component
   initApp({
-    cdn: '//assets.quinn.live/traya.health/',
-    shop_domain: 'traya.health',
+    cdn: '',
+    shop_domain: '',
     shop_type: 'GENERAL',
   });
 
