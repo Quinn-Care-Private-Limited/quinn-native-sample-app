@@ -1,4 +1,10 @@
-import {Carousel, Overlay, Stories, setPage} from '@quinninc/rn-core/index';
+import {
+  Carousel,
+  Overlay,
+  Popup,
+  Stories,
+  setPage,
+} from '@quinninc/rn-core/index';
 import {
   IOpenOverlayAction,
   IWidgetTypes,
@@ -32,6 +38,8 @@ function QuinnVideoComp({handle, widgettype, layer}: Props) {
       return <Carousel showLoader layer={layer} />;
     } else if (widgettype === 'story') {
       return <Stories showLoader layer={layer} />;
+    } else if (widgettype === 'floating') {
+      return <Popup layer={1} />;
     }
   }
 
