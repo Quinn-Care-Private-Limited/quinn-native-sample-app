@@ -1,16 +1,5 @@
-import {
-  Carousel,
-  Overlay,
-  Popup,
-  Stories,
-  setPage,
-} from '@quinninc/rn-core/index';
-import {
-  IOpenOverlayAction,
-  IWidgetTypes,
-} from '@quinninc/rn-core/types/app.types';
-import {useEffect, useState} from 'react';
-import {Modal} from 'react-native';
+import {Carousel, Popup, Stories} from '@quinninc/rn-core/index';
+import {IWidgetTypes} from '@quinninc/rn-core/types/app.types';
 
 interface Props {
   handle: string;
@@ -18,49 +7,32 @@ interface Props {
   layer: number;
 }
 
+//This only works for general shop type
+
 function QuinnVideoComp({handle, widgettype, layer}: Props) {
-  const [viewLoaded, setViewLoaded] = useState(false);
-  const [overlayData, setOverlayData] = useState<IOpenOverlayAction | null>(
-    null,
-  );
-
-  useEffect(() => {
-    setPage({
-      page_handle: handle,
-      page_id: handle,
-      page_type: '',
-    });
-    setViewLoaded(true);
-  }, []);
-
   function getWidgets() {
     if (widgettype === 'cards') {
-      return <Carousel showLoader layer={layer} />;
+      return (
+        <Carousel
+          showLoader
+          layer={layer}
+          playlistId={`${handle}_CARD_${layer}`}
+        />
+      );
     } else if (widgettype === 'story') {
-      return <Stories showLoader layer={layer} />;
+      return (
+        <Stories
+          showLoader
+          layer={layer}
+          playlistId={`${handle}_STORY_${layer}`}
+        />
+      );
     } else if (widgettype === 'floating') {
-      return <Popup layer={1} />;
+      return <Popup layer={1} playlistId={`${handle}_HANDLE_${layer}`} />;
     }
   }
 
-  if (viewLoaded) {
-    return (
-      <>
-        {getWidgets()}
-        <Modal animationType="slide" visible={!!overlayData} transparent>
-          <Overlay
-            data={overlayData}
-            direction="horizontal"
-            disableGradient
-            videoResizeMode="contain"
-            // renderOverlaySlideItem={(props) => <CustomSideComponent {...props} />}
-            // playlistId={playlistId}
-          />
-        </Modal>
-      </>
-    );
-  }
-  return null;
+  return <>{getWidgets()}</>;
 }
 
 export default QuinnVideoComp;

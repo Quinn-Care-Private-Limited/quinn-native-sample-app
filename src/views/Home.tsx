@@ -8,7 +8,7 @@ function Home() {
       <Text>Home</Text>
       <QuinnVideoComp handle="/index" layer={1} widgettype={'cards'} />
       <Text>Another text</Text>
-      <QuinnVideoComp handle="/index" layer={2} widgettype={'cards'} />
+      <QuinnVideoComp handle="/login" layer={1} widgettype={'story'} />
     </SafeAreaView>
   );
 }
